@@ -1,10 +1,16 @@
 import type { NextPage } from 'next'
 import { Fragment } from 'react'
-import styles from '../styles/Home.module.css'
+import { useSelector } from 'react-redux'
+import { RootState } from '../redux/store'
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
+const currentUser = useSelector((state: RootState )=> state.user.user);
+
   return (
-    <Fragment></Fragment>
+    <Fragment>
+      <h1>Index Page</h1>
+      <h2>{currentUser.username}, {currentUser.id}</h2>
+    </Fragment>
   )
 }
 

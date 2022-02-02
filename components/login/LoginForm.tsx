@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './loginform.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../redux/userSlice';
@@ -7,7 +7,7 @@ import { RootState } from '../../redux/store';
 
 const LoginForm = () => {
   const [message, setMessage] = useState(''); //error messages
-  const user = useSelector((state: RootState )=> state.user.user)
+  const user = useSelector((state: RootState )=> state.user)
   const dispatch = useDispatch();
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -19,9 +19,14 @@ const LoginForm = () => {
     const password = passwordRef.current?.value;
 
     await dispatch(loginUser({username : username, password : password}))
-    
-    if (user.id != -1) router.push('/');
   }
+
+  useEffect(()=>{
+    if (user.user.id != -1) router.push('/');
+
+    setMessage(user.message);
+
+  }, [message, router, user.message, user.user.id])
 
   return (
     <div className="loginform">

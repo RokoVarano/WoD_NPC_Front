@@ -33,12 +33,14 @@ const Home: NextPage = () => {
     
   }, [])
 
-  return (
+  if (currentUser && currentUser.id != -1) return (
     <Fragment>
       <h1>Index Page</h1>
       <h2>{currentUser.username}, {currentUser.id}</h2>
     </Fragment>
   )
+
+  return null
 }
 
 export default Home

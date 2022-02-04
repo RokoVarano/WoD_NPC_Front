@@ -22,7 +22,10 @@ const LoginForm = () => {
   }
 
   useEffect(()=>{
-    if (user.user.id != -1) router.push('/');
+    if (user.user.id != -1) {
+      localStorage.setItem("key", user.user.token);
+      router.push('/');
+    }
 
     setMessage(user.message);
 

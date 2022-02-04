@@ -16,5 +16,11 @@ export default class User {
             headers: { "Content-Type": "multipart/form-data" },
           })
     }
+
+    static auth_with_token = async (token: string | null) => {
+        return await axios.get(API.CURRENT_USER, { headers: {
+            "Authorization" : "Bearer " + token
+        }})
+    }
 }
 
